@@ -63,6 +63,13 @@ export class UserService extends FetcherService {
 		super(config);
 	}
 
+	/**
+	 * Gets the size in bytes of a base64 string.
+	 * 
+	 * @param base64Data - The base64 data show size is required.
+	 * 
+	 * @returns The size in bytes of the data.
+	 */	
 	private _base64ByteSize(base64Data: string): number {
 		const paddingMatch = base64Data.match(/=+$/);
 		const paddingLength = paddingMatch ? paddingMatch[0].length : 0;
@@ -70,6 +77,13 @@ export class UserService extends FetcherService {
 		return (base64Data.length * 3) / 4 - paddingLength;
 	}
 
+	/**
+	 * Normalizes base64 data into just the raw base64 string.
+	 * 
+	 * @param payload - The data to normalize.
+	 * 
+	 * @returns The raw base64 part of the data.
+	 */
 	private _normalizeBase64(payload: string): string {
 		const trimmedPayload = payload.trim();
 		const lowerCasePayload = trimmedPayload.toLowerCase();
