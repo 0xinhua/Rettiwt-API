@@ -1,6 +1,6 @@
 {
 	"name": "twttr-api",
-	"version": "6.2.1",
+	"version": "6.3.2",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"description": "An API for fetching data from TwitterAPI, without any rate limits!",
