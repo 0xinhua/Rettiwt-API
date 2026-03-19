@@ -146,9 +146,7 @@ export class TweetService extends FetcherService {
 			const response = await this.request<ITweetRepliesResponse>(resource, { id: id });
 
 			// Deserializing response
-			const data = Extractors[resource](response, id);
-
-			return data as T extends string ? Tweet | undefined : Tweet[];
+			return response as unknown as T extends string ? Tweet | undefined : Tweet[];
 		}
 		// If user is authenticated and details of multiple tweets required
 		else if (this.config.userId != undefined && Array.isArray(id)) {
@@ -157,10 +155,8 @@ export class TweetService extends FetcherService {
 			// Fetching raw tweet details
 			const response = await this.request<ITweetDetailsBulkResponse>(resource, { ids: id });
 
-			// Deserializing response
-			const data = Extractors[resource](response, id);
-
-			return data as T extends string ? Tweet | undefined : Tweet[];
+			// Returning raw response
+			return response as unknown as T extends string ? Tweet | undefined : Tweet[];
 		}
 		// If user is not authenticated
 		else {
@@ -170,9 +166,7 @@ export class TweetService extends FetcherService {
 			const response = await this.request<ITweetDetailsResponse>(resource, { id: String(id) });
 
 			// Deserializing response
-			const data = Extractors[resource](response, String(id));
-
-			return data as T extends string ? Tweet | undefined : Tweet[];
+			return response as unknown as T extends string ? Tweet | undefined : Tweet[];
 		}
 	}
 
